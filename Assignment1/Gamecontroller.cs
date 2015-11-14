@@ -82,27 +82,35 @@ namespace Assignment1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+
             // TODO: Add your drawing code here
-            int counter = 0;
+            spriteBatch.Begin();
+            int squarecounter = 0;
             for (int x = 0; x < 8; x++)
             {
                 for (int y = 0; y < 8; y++)
                 {
-                   if(counter % 2 == 0)
+                    if (squarecounter % 2 == 0)
                    {
-                       //Rita vit
+                       //White square
                        spriteBatch.Draw(squareWhite,camera.GetCoordinates(x,y),Color.White);
                    }
                    else
                    {
-                        //Rita svart
+                        //Black Square
                        spriteBatch.Draw(squareBlack,camera.GetCoordinates(x,y),Color.White);
                    }
-                    counter ++;
+                    squarecounter++;
                 }
-                counter ++;
+                squarecounter++;
             }
+            //Tested writing a chesspice in upper left corner No rotation on board
+            spriteBatch.Draw(chessPiece,camera.GetCoordinates(0,0),Color.White);
+
+            //Tested writing a chesspice in lower right corner rotation on board
+            spriteBatch.Draw(chessPiece,camera.GetRotatedCoordinates(0,0),Color.White);
+
+
             spriteBatch.End();
                 base.Draw(gameTime);
         }
