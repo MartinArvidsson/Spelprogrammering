@@ -19,8 +19,10 @@ namespace Assignment1
         public Gamecontroller()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 700;
-            graphics.PreferredBackBufferHeight = 600;
+            //graphics.PreferredBackBufferWidth = 640;
+            //graphics.PreferredBackBufferHeight = 640;
+            graphics.PreferredBackBufferWidth = 320;
+            graphics.PreferredBackBufferHeight = 240;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = false;
@@ -35,7 +37,8 @@ namespace Assignment1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            //https://msdn.microsoft.com/en-us/library/bb447674.aspx
+            camera.ScaleGame(graphics);
             base.Initialize();
         }
 
@@ -93,26 +96,28 @@ namespace Assignment1
                     if (squarecounter % 2 == 0)
                    {
                        //White square
-                       spriteBatch.Draw(squareWhite,camera.GetCoordinates(x,y),Color.White);
+                       spriteBatch.Draw(squareWhite, camera.GetCoordinates(x, y), null, Color.White, 0, new Vector2(0, 0), camera.scale, SpriteEffects.None, 0);
+                     //spriteBatch.Draw(whiteSquare, camera.getVisualCoord(x, y), null, Color.White, 0, new Vector2(0, 0), camera.scale, SpriteEffects.None, 0);
                    }
                    else
                    {
                         //Black Square
-                       spriteBatch.Draw(squareBlack,camera.GetCoordinates(x,y),Color.White);
+                       spriteBatch.Draw(squareBlack, camera.GetCoordinates(x, y), null, Color.White, 0, new Vector2(0, 0), camera.scale, SpriteEffects.None, 0);
                    }
                     squarecounter++;
                 }
                 squarecounter++;
             }
-            //Tested writing a chesspice in upper left corner No rotation on board
-            spriteBatch.Draw(chessPiece,camera.GetCoordinates(0,0),Color.White);
+            //Testing writing a chesspice in upper left corner No rotation on board
+            spriteBatch.Draw(chessPiece, camera.GetCoordinates(0,0), null, Color.White, 0, new Vector2(0, 0), camera.scale, SpriteEffects.None, 0);
 
-            //Tested writing a chesspice in lower right corner rotation on board
-            spriteBatch.Draw(chessPiece,camera.GetRotatedCoordinates(0,0),Color.White);
+            //Testing writing a chesspice in lower right corner rotation on board
+            //spriteBatch.Draw(chessPiece, camera.GetRotatedCoordinates(0,0), null, Color.White, 0, new Vector2(0, 0), camera.scale, SpriteEffects.None, 0);
+
 
 
             spriteBatch.End();
-                base.Draw(gameTime);
+            base.Draw(gameTime);
         }
     }
 }

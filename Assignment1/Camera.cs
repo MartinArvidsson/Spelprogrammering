@@ -11,14 +11,22 @@ namespace Assignment1
     {
         int sizeOfTile = 64;
         int borderSize = 64;
+        public float scale;
 
         public Vector2 GetCoordinates(int xcoordinate,int ycoordinate)
         {
             // 0-0 = 64-64, 7-7 = 512-512 etc...
-            int visualX = borderSize + xcoordinate * sizeOfTile;
-            int visualY = borderSize + ycoordinate * sizeOfTile;
+                        //64 + X * 64 = Place to start writing tile from
+                        //Ex. 64 + 0 * 64 = 64
+                            //Start at end of border
+            //draw square where border + coordinate * tilesize is then scale it
+            //(64 + X * 64) * scale
+            //(64 + 4 * 64) * scale
+            //(64 + 256) * scale
+            float visualX = (borderSize + xcoordinate * sizeOfTile) * scale;
+            float visualY = (borderSize + ycoordinate * sizeOfTile) * scale;
 
-            return new Vector2(visualX, visualY);
+            return new Vector2(visualX,visualY);
         }
 
         public Vector2 GetRotatedCoordinates(int xplayercoordinate,int yplayercoordinate)
@@ -30,10 +38,26 @@ namespace Assignment1
             //  2,7	                  384,64
             //  7,7	                  64,64
 
+            //              entire board   -    Already placed tiles
             int visualX = (sizeOfTile * 8) - (xplayercoordinate * sizeOfTile);
             int visualY = (sizeOfTile * 8) - (yplayercoordinate * sizeOfTile);
 
             return new Vector2(visualX, visualY);
+        }
+
+        public void ScaleGame(GraphicsDeviceManager graphics)
+        {
+            float XScale = (float)graphics.GraphicsDevice.Viewport.Width / (sizeOfTile * 8 + borderSize *2);
+            float YScale = (float)graphics.GraphicsDevice.Viewport.Width / (sizeOfTile * 8 + borderSize *2);
+
+            if(XScale < YScale)
+            {
+                scale = XScale;
+            }
+            else
+            {
+                scale = YScale;
+            }
         }
     }
 }
