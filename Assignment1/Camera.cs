@@ -48,7 +48,7 @@ namespace Assignment1
         public void ScaleGame(GraphicsDeviceManager graphics)
         {
             float XScale = (float)graphics.GraphicsDevice.Viewport.Width / (sizeOfTile * 8 + borderSize *2);
-            float YScale = (float)graphics.GraphicsDevice.Viewport.Width / (sizeOfTile * 8 + borderSize *2);
+            float YScale = (float)graphics.GraphicsDevice.Viewport.Height / (sizeOfTile * 8 + borderSize *2);
 
             if(XScale < YScale)
             {
